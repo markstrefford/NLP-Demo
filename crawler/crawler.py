@@ -112,6 +112,7 @@ class Crawler(object):
 
     def set(self, url, html):
         self.content[self.domain][url] = html
+        print ("set: self.is_cacheable({})={} ".format(url,self.is_cacheable(url)))
         if self.is_cacheable(url):
             self.cache.set(self.domain, url, html)
 
@@ -126,8 +127,10 @@ class Crawler(object):
         return page
 
     def is_cacheable(self, url):
-        return self.cache and self.no_cache \
-            and not self.no_cache(url)
+        return True;
+        #print ('is_cachable: self.cache={} and self.no_cache={} and not self.no_cache({})={}'.format(self.cache, self.no_cache, url, 'abcd'))
+        #return self.cache and self.no_cache \
+        #    and not self.no_cache(url)
 
     def _crawl(self, urls, max_depth):
         n_urls = set()
